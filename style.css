@@ -1,91 +1,72 @@
-/* Reset default styles */
-* {
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e8f5e9; /* Light green background */
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-/* Full screen gradient background */
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #ff6a00, #ee0979);
-  background-size: cover;
-  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  color: white;
+  min-height: 100vh;
+  color: #2e7d32; /* Deep green text */
 }
 
-/* Container box */
-.container {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px 40px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  max-width: 500px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Heading */
 h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  background: -webkit-linear-gradient(45deg, #fff, #ffe600);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-top: 40px;
+  font-size: 2.5rem;
+  color: #1b5e20;
 }
 
-/* Dropdowns */
-select {
-  width: 48%;
-  padding: 10px;
-  margin: 10px 1%;
-  border-radius: 10px;
-  border: none;
-  font-size: 16px;
-  color: #333;
-}
-
-/* Text area */
-textarea {
-  width: 100%;
-  padding: 15px;
-  margin: 15px 0;
-  border-radius: 10px;
-  border: none;
-  font-size: 16px;
-  resize: vertical;
-  color: #333;
-}
-
-/* Translate button */
-button {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #00f260, #0575e6);
-  color: white;
-  border: none;
+.container {
+  margin-top: 20px;
+  background-color: #ffffff;
   border-radius: 12px;
-  font-size: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+select,
+textarea,
+button {
+  font-size: 1rem;
+  padding: 10px;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+select:focus,
+textarea:focus,
+button:hover {
+  border-color: #66bb6a;
+}
+
+textarea {
+  resize: vertical;
+  height: 120px;
+}
+
+button {
+  background-color: #66bb6a;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #fc466b, #3f5efb);
-  transform: scale(1.03);
+  background-color: #43a047;
 }
 
-/* Translated text output */
 #translatedText {
-  margin-top: 20px;
-  padding: 15px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 10px;
-  min-height: 50px;
-  font-size: 16px;
-  color: #fff;
+  min-height: 60px;
+  padding: 12px;
+  background-color: #f1f8e9;
+  border: 1px solid #c5e1a5;
+  border-radius: 8px;
+  white-space: pre-wrap;
 }
