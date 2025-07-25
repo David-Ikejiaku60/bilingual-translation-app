@@ -1,9 +1,9 @@
 async function translateText() {
-  const text = document.getElementById("sourceText").value;
+  const sourceText = document.getElementById("sourceText").value;
   const targetLang = document.getElementById("targetLang").value;
   const translatedText = document.getElementById("translatedText");
 
-  if (!text) {
+  if (!sourceText.trim()) {
     translatedText.innerText = "Please enter text to translate.";
     return;
   }
@@ -11,56 +11,21 @@ async function translateText() {
   translatedText.innerText = "Translating...";
 
   try {
-    const response = await fetch("https://libretranslate.de/translate", {
-      method: "POST",
-      body: JSON.stringify({
-        q: text,
-        source: "en",
-        target: targetLang,
-        format: "text"
-      }),
-      headers: { "Content-Type": "application/json" }
-    });
+    const encodedText = encodeURIComponent(sourceText);
+    const langPair = `en|${targetLang}`;
+    const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=${langPair}`;
 
+    const response = await fetch(url);
     const data = await response.json();
-    translatedText.innerText = data.translatedText;
-  } catch (error) {
-    translatedText.innerText = "Translation failed. Please try again.";
-    console.error(error);
-  }
-}
-async function translateText() {
-  const text = document.getElementById("sourceText").value;
-  const targetLang = document.getElementById("targetLang").value;
-  const translatedText = document.getElementById("translatedText");
 
-  if (!text) {
-    translatedText.innerText = "Please enter text to translate.";
-    return;
-  }
-
-  translatedText.innerText = "Translating...";
-
-  try {
-    const response = await fetch("https://libretranslate.de/translate", {
-      method: "POST",
-      body: JSON.stringify({
-        q: text,
-        source: "en",
-        target: targetLang,
-        format: "text"
-      }),
-      headers: { "Content-Type": "application/json" }
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    if (data?.responseData?.translatedText) {
+      translatedText.innerText = data.responseData.translatedText;
+    } else {
+      translatedText.innerText = "Translation failed. Please try again.";
+      console.error("Unexpected response format:", data);
     }
-
-    const data = await response.json();
-    translatedText.innerText = data.translatedText;
   } catch (error) {
     translatedText.innerText = "Translation failed. Please try again.";
-    console.error("Translation error:", error);
+    console.error("Fetch error:", error);
   }
 }
