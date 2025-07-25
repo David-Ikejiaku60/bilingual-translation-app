@@ -1,37 +1,61 @@
 async function translateText() {
-  const sourceText = document.getElementById("sourceText").value;
+  const sourceText = document.getElementById("sourceText").value.trim();
   const sourceLang = document.getElementById("sourceLang").value;
   const targetLang = document.getElementById("targetLang").value;
-  const translatedText = document.getElementById("translatedText");
+  const translatedDiv = document.getElementById("translatedText");
+  const button = document.querySelector("button");
 
-  if (!sourceText.trim()) {
-    translatedText.innerText = "Please enter text to translate.";
+  // Clear previous result
+  translatedDiv.innerText = "";
+  
+  if (!sourceText) {
+    translatedDiv.innerText = "Please enter some text to translate.";
     return;
   }
 
   if (sourceLang === targetLang) {
-    translatedText.innerText = "Source and target languages must be different.";
+    translatedDiv.innerText = "Please select different source and target languages.";
     return;
   }
 
-  translatedText.innerText = "Translating...";
+  // Indicate loading
+  button.disabled = true;
+  button.innerText = "Translating...";
 
   try {
-    const encodedText = encodeURIComponent(sourceText);
-    const langPair = `${sourceLang}|${targetLang}`;
-    const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=${langPair}`;
+    // Primary: LibreTranslate API
+    const response = await fetch("https://libretranslate.de/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        q: sourceText,
+        source: sourceLang,
+        target: targetLang,
+        format: "text"
+      })
+    });
 
-    const response = await fetch(url);
+    if (!response.ok) throw new Error("LibreTranslate failed");
+
     const data = await response.json();
+    translatedDiv.innerText = data.translatedText || "No translation found.";
+  } catch (err) {
+    console.warn("LibreTranslate failed. Falling back to MyMemory...");
 
-    if (data?.responseData?.translatedText) {
-      translatedText.innerText = data.responseData.translatedText;
-    } else {
-      translatedText.innerText = "Translation failed. Please try again.";
-      console.error("Unexpected response format:", data);
+    try {
+      // Fallback: MyMemory API
+      const fallbackResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(sourceText)}&langpair=${sourceLang}|${targetLang}`);
+      const fallbackData = await fallbackResponse.json();
+
+      const translated = fallbackData?.responseData?.translatedText;
+      translatedDiv.innerText = translated || "Fallback failed.";
+    } catch (fallbackErr) {
+      translatedDiv.innerText = "Translation failed. Please check your network.";
     }
-  } catch (error) {
-    translatedText.innerText = "Translation failed. Please try again.";
-    console.error("Fetch error:", error);
+  } finally {
+    button.disabled = false;
+    button.innerText = "Translate";
   }
 }
