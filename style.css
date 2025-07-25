@@ -1,90 +1,91 @@
-/* Reset and setup */
+/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Full screen gradient background */
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f5a623, #f76b1c, #e94057, #8a2387);
-  background-size: 600% 600%;
-  animation: gradientShift 15s ease infinite;
-  color: #fff;
+  background: linear-gradient(to right, #ff6a00, #ee0979);
+  background-size: cover;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  color: white;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Container box */
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
 }
 
+/* Heading */
 h1 {
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-  margin-bottom: 30px;
-  background: -webkit-linear-gradient(45deg, #fff, #ffeb3b);
+  font-size: 2rem;
+  margin-bottom: 20px;
+  background: -webkit-linear-gradient(45deg, #fff, #ffe600);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-select,
-textarea,
-button {
-  width: 90%;
-  max-width: 500px;
-  padding: 14px;
-  margin: 12px 0;
-  font-size: 16px;
-  border-radius: 12px;
+/* Dropdowns */
+select {
+  width: 48%;
+  padding: 10px;
+  margin: 10px 1%;
+  border-radius: 10px;
   border: none;
-  outline: none;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  color: #333;
+}
+
+/* Text area */
+textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  resize: vertical;
+  color: #333;
+}
+
+/* Translate button */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #00f260, #0575e6);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-select {
-  background: #ffffff;
-  color: #333;
-  cursor: pointer;
-}
-
-textarea {
-  resize: none;
-  background: #ffffffdd;
-  color: #333;
-}
-
-button {
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  letter-spacing: 1px;
-}
-
 button:hover {
-  background: linear-gradient(45deg, #ff512f, #dd2476);
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #fc466b, #3f5efb);
+  transform: scale(1.03);
 }
 
+/* Translated text output */
 #translatedText {
-  width: 90%;
-  max-width: 500px;
-  margin-top: 25px;
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  font-size: 18px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
   min-height: 50px;
-  text-align: left;
+  font-size: 16px;
+  color: #fff;
 }
