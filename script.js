@@ -1,5 +1,6 @@
 async function translateText() {
   const sourceText = document.getElementById("sourceText").value;
+  const sourceLang = document.getElementById("sourceLang").value;
   const targetLang = document.getElementById("targetLang").value;
   const translatedText = document.getElementById("translatedText");
 
@@ -8,11 +9,16 @@ async function translateText() {
     return;
   }
 
+  if (sourceLang === targetLang) {
+    translatedText.innerText = "Source and target languages must be different.";
+    return;
+  }
+
   translatedText.innerText = "Translating...";
 
   try {
     const encodedText = encodeURIComponent(sourceText);
-    const langPair = `en|${targetLang}`;
+    const langPair = `${sourceLang}|${targetLang}`;
     const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=${langPair}`;
 
     const response = await fetch(url);

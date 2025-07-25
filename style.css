@@ -1,65 +1,43 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #ffffff);
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
-
-.container {
-  max-width: 600px;
-  margin: 60px auto;
-  padding: 30px;
-  background: white;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f4f8;
+  padding: 40px;
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
-  color: #00796b;
+  color: #2c3e50;
   margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
 }
 
 textarea,
-select {
-  width: 100%;
+select,
+button {
+  width: 90%;
+  max-width: 500px;
+  margin: 10px auto;
   padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
   border-radius: 8px;
-  resize: vertical;
+  border: 1px solid #ccc;
   font-size: 16px;
+  display: block;
 }
 
 button {
-  width: 100%;
-  background-color: #00796b;
+  background-color: #3498db;
   color: white;
   border: none;
-  padding: 14px;
-  font-size: 16px;
-  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #004d40;
+  background-color: #2980b9;
 }
 
 #translatedText {
   margin-top: 20px;
-  background: #f1f8e9;
-  padding: 15px;
-  border-radius: 8px;
   font-size: 18px;
-  min-height: 60px;
-  white-space: pre-wrap;
+  color: #333;
+  min-height: 30px;
 }
